@@ -1,0 +1,109 @@
+:host {
+    align-items: center;
+    position: relative;
+    width: 100%;
+    display: block;
+    .synergy {
+        display: flex;
+        align-items: center;
+        border: 1px solid #14141a;
+        background: #2e2e38;
+        border-radius: 10px 3px 3px 10px;
+        height: 48px;
+        box-shadow: 0 2px 8px rgba(#14141a, .5);
+        &.rank-0 {
+            .image {
+                background: #a0715e;
+            }
+        }
+        &.rank-1 {
+            .image {
+                background: #7c8f92;
+            }
+        }
+        &.rank-2 {
+            .image {
+                background: #bd9a38;
+            }
+        }
+        &.rank-3 {
+            .image {
+                background: #558e9f;
+            }
+        }
+        .image {
+            position: absolute;
+            left: -16px;
+            width: 24px;
+            height: 24px;
+            padding: 8px;
+            border-radius: 50%;
+            background: #373740;
+            border: 1px solid #14141a;
+            img {
+                width: 100%;
+            }
+        }
+        .current {
+            background: #24242c;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 16px;
+            padding-left: 32px;
+            font-size: 1.9rem;
+            font-weight: bold;
+            border-radius: 10px 0px 0px 10px;
+            color: #70707e;
+            &.active {
+                color: #fff
+            }
+        }
+        .identity {
+            padding: 12px 24px 12px 16px;
+        }
+        .name {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.3rem;
+            margin-bottom: 4px;
+        }
+        .thresholds {
+            font-size: 1.2rem;
+            display: flex;
+            align-items: flex-start;
+            color: #70707e;
+            .active {
+                color: #fff
+            }
+            span {
+                margin-right: 8px;
+            }
+        }
+    }
+    .emblems {
+        display: flex;
+        position: absolute;
+        flex-direction: row-reverse;
+        top: -8px;
+        right: 4px;
+    }
+}
+
+::ng-deep {
+    .emblem {
+        border-radius: 50%;
+        background: #373740;
+        border: 1px solid #24242c;
+        width: 19px;
+        height: 19px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .emblem img {
+        width: 80%;
+    }
+}

@@ -1,0 +1,52 @@
+<div class="section pool">
+    <h3>Champion pool</h3>
+    <div class="filter-list">
+        <button class="filter poor" (click)="applyPoolFilter(0)" [class.active]="hasFilter(0)"><span></span></button>
+        <button class="filter common" (click)="applyPoolFilter(1)" [class.active]="hasFilter(1)"><span></span></button>
+        <button class="filter rare" (click)="applyPoolFilter(2)" [class.active]="hasFilter(2)"><span></span></button>
+        <button class="filter epic" (click)="applyPoolFilter(3)" [class.active]="hasFilter(3)"><span></span></button>
+        <button class="filter legendary" (click)="applyPoolFilter(4)" [class.active]="hasFilter(4)"><span></span></button>
+        <button class="filter depic" (click)="applyPoolFilter(5)" [class.active]="hasFilter(5)"><span></span></button>
+        <button class="filter dlegendary" (click)="applyPoolFilter(6)" [class.active]="hasFilter(6)"><span></span></button>
+    </div>
+    <div class="champion-list">
+        <div *ngFor="let champion of getFilteredChampions()" class="champion ">
+            <por-champion *ngIf="champion.totalWeight > 0" [champion]="champion" class="rarity-{{champion.rarity}}" (click)="addChampion(champion)"></por-champion>
+        </div>
+    </div>
+</div>
+<div class="section synergies">
+    <h3>Synergies</h3>
+    <div class="active-synergies" *ngIf="activeSynergies().length > 0">
+        <por-synergy [synergy]="synergy" [emblemNumber]="numberOfEmblem(synergy.name)" *ngFor="let synergy of activeSynergies(); let i = index" (click)="applySynergyFilter(synergy.name)">
+            <div class="emblem-wrapper" *ngFor="let emblem of getEmblems(synergy.name)" (click)="removeEmblem(emblem)">
+                <div class="emblem"><img src="https://rerollcdn.com/icons/{{synergy.name | lowercase}}.png " /></div>
+            </div>
+        </por-synergy>
+    </div>
+    <por-synergy [synergy]="synergy " *ngFor="let synergy of inactiveSynergies(); let i = index" (click)="applySynergyFilter(synergy.name)">
+        <div class="emblem-wrapper" *ngFor="let emblem of getEmblems(synergy.name)" (click)="removeEmblem(emblem)">
+            <div class="emblem"><img src="https://rerollcdn.com/icons/{{synergy.name | lowercase}}.png " /></div>
+        </div>
+    </por-synergy>
+</div>
+<div class="section selected ">
+    <h3>Composition en cours</h3>
+    <div class="champion-list ">
+        <div *ngFor="let champion of composition.champions let i= index " class="champion ">
+            <por-champion [champion]="champion " class="rarity-{{champion.rarity}} " (click)="removeChampion(i) "></por-champion>
+        </div>
+    </div>
+    <div class="champion-slots">
+        <div class="slot" *ngFor="let slot of articialArray(currentLevel)"></div>
+    </div>
+    <div class="comp-value">
+        <div class="value">{{ getCompValue() | number:'1.0-0' }}</div>
+        <div>Valeur de la composition</div>
+    </div>
+    <h3>Ajouter un emblême</h3>
+    <div class="emblem-list ">
+        <div class="emblem " *ngFor="let emblem of emblemsPool " (click)="addEmblem(emblem) ">
+            <img src="https://rerollcdn.com/icons/{{emblem | lowercase}}.png " /> {{ emblem }}</div>
+    </div>
+</div>

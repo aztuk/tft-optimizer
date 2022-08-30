@@ -1,0 +1,24 @@
+@import "assets/scss/_normalize.scss";
+@import "assets/scss/_variables.scss";
+@import "assets/scss/_fonts.scss";
+@import "assets/scss/_main.scss";
+@import "../node_modules/@mdi/font/scss/materialdesignicons.scss";
+html {
+    font-size: 10px;
+}
+
+body {
+    font-size: 1.5rem;
+    font-family: 'Arboria';
+    background: $default-background;
+    color: $default-text;
+    user-select: none;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Brother';
+    margin: 0;
+}

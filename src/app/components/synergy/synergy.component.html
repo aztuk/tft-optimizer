@@ -1,0 +1,16 @@
+<div class="synergy rank-{{getCurrentThresholdLevel()}}" [class.active]="synergy.activated">
+    <div class="image">
+        <img src="https://rerollcdn.com/icons/{{synergy.name | lowercase}}.png" />
+    </div>
+    <div class="current" [class.active]="synergy.currentThreshold > 0">
+        {{ synergy.number }}
+    </div>
+    <div class="identity">
+        <div class="name">{{ synergy.name }}</div>
+        <div class="thresholds"><span *ngFor="let threshold of thresholds"><span [class.active]="threshold === synergy.currentThreshold">{{ threshold }}</span></span>
+        </div>
+    </div>
+</div>
+<div class="emblems">
+    <ng-content></ng-content>
+</div>
