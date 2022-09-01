@@ -29,9 +29,7 @@ export enum eOrigins {
     MYSTIC = "MYSTIC",
     SHAPESHIFTER = "SHAPESHIFTER",
     SWIFTSHOT = "SWIFTSHOT",
-    WARRIOR = "WARRIOR",
-    SPELLTHIEF = "SPELLTHIEF",
-    STARCALLER = "STARCALLER"
+    WARRIOR = "WARRIOR"
     
   }
   
@@ -49,6 +47,10 @@ export enum eOrigins {
     name: string
     image: string
     baseWeight: number
+    newSynergyWeight: number
+    sameSynergyWeight: number
+    potentialSynergyPoints: number
+    tierlistPoints: number
     totalWeight: number
     origin: eOrigins[]
     classes: eClasses[]

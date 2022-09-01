@@ -1,5 +1,5 @@
-<img [src]="champion.image" />
-<div class="name">{{champion.name}}</div>
-<div class="value">
-    {{champion.totalWeight | number:'1.0-2'}}
+<div class="wrapper"><img [src]="champion.image" />
+    <div class="name">{{champion.name}}</div>
 </div>
+
+<ng-content></ng-content>

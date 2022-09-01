@@ -5,6 +5,7 @@ import { iChampion, iComposition, iEmblem, eRarity } from './../../interface/int
 import { WeightRuntimeService } from './../../services/weight-runtime.service';
 import { ChampionsCollectionService } from './../../services/champions-collection.service';
 import { Component, OnInit } from '@angular/core';
+import { iCompositionTierList } from 'src/app/interface/compos';
 
 
 @Component({
@@ -17,9 +18,10 @@ export class MainComponent implements OnInit {
   public champions!:iChampion[]; 
   public emblemsPool: iEmblem[] = SynergyCollectionService.getAllSynergies();
   public composition:iComposition = new Composition();
-  public currentLevel: number = 10;
+  public currentLevel: number = 9;
   public poolFilter: eRarity[] = [eRarity.POOR, eRarity.COMMON];
   public poolSynergyFilter: (eClasses|eOrigins|undefined);
+  public suggestedCompositions!: iCompositionTierList[];
 
   constructor(private weight: WeightRuntimeService) {
     this.weight.pool$.subscribe((v) => {
@@ -47,6 +49,10 @@ export class MainComponent implements OnInit {
     }
   }
 
+  getChampion(champion: string) {
+    return this.weight.getChampionFromPool(champion);
+  }
+
   hasFilter(nb: eRarity):boolean {
     return this.poolFilter.includes(nb);
   }
@@ -56,21 +62,21 @@ export class MainComponent implements OnInit {
   }
 
   getCompValue():number {
-    return this.composition.champions.reduce((prev, curr) => { return prev + curr.totalWeight }, 0);
+    return this.composition.champions.reduce((prev, curr) => { return prev + curr.totalWeight }, 0) * 28;
   }
  
   // Should implement limite base on level
   addChampion(champion: iChampion) {
     this.composition.addChampion(champion);
     this.weight.refreshPool(this.composition, this.currentLevel);
-    this.weight.setCompositionValue(this.composition);
+    this.suggestedCompositions = this.weight.getSuggestedCompositions(this.composition);
   }
 
   // Should implement limite base on level
   removeChampion(index: number) {
     this.composition.removeChampion(index);
     this.weight.refreshPool(this.composition, this.currentLevel);
-    this.weight.setCompositionValue(this.composition);
+    this.suggestedCompositions = this.weight.getSuggestedCompositions(this.composition);
   }
 
   getEmblems(synergy: iEmblem): iEmblem[] {
@@ -80,13 +86,13 @@ export class MainComponent implements OnInit {
   addEmblem(emblem: iEmblem) {
     this.composition.addEmblem(emblem);
     this.weight.refreshPool(this.composition, this.currentLevel);
-    this.weight.setCompositionValue(this.composition);
+    this.suggestedCompositions = this.weight.getSuggestedCompositions(this.composition);
   }
 
   removeEmblem(emblem: iEmblem) {
     this.composition.removeEmblem(this.composition.emblems.indexOf(emblem));
     this.weight.refreshPool(this.composition, this.currentLevel);
-    this.weight.setCompositionValue(this.composition);
+    this.suggestedCompositions = this.weight.getSuggestedCompositions(this.composition);
   }
 
   numberOfEmblem(emblem: string) {

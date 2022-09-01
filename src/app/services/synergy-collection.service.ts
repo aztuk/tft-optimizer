@@ -34,8 +34,6 @@ export class SynergyCollectionService {
     [eClasses.MYSTIC, [2,3,4,5]],
     [eClasses.SHAPESHIFTER, [2,4,6]],
     [eClasses.SWIFTSHOT, [2,4,6]],
-    [eClasses.STARCALLER, [1]],
-    [eClasses.SPELLTHIEF, [1]],
     [eClasses.WARRIOR, [2,4,6]],
   ])
 

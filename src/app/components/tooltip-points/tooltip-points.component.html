@@ -1,0 +1,9 @@
+<h4>
+    Points breakdown</h4>
+<div class="keyvalue total"><span>Total</span> {{ entity.totalWeight | number:'1.0-2' }}</div>
+<div class="keyvalue" *ngIf="entity.baseWeight > 0"><span>Base</span>{{ entity.baseWeight}}</div>
+<div class="keyvalue" *ngIf="entity.sameSynergyWeight > 0"><span>Bénéficie d'une synergie existante</span> {{ entity.sameSynergyWeight| number:'1.0-2' }}</div>
+<div class="keyvalue" *ngIf="entity.newSynergyWeight > 0"><span>Créé une nouvelle synergie</span> {{ entity.newSynergyWeight| number:'1.0-2' }}</div>
+<div class="keyvalue" *ngIf="entity.potentialSynergyPoints > 0"><span>Avance une autre synergie</span> {{ entity.potentialSynergyPoints | number:'1.0-2' }}</div>
+<div class="keyvalue" *ngIf="entity.tierlistPoints > 0"><span>Existe dans une compo top tier</span> {{ entity.tierlistPoints | number:'1.0-2' }}</div>
+<div class="keyvalue" *ngIf="rarityValuePoints > 0"><span>Bonus de rareté </span>{{ rarityValuePoints | number:'1.0-2' }}</div>

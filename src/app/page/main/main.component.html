@@ -9,9 +9,9 @@
         <button class="filter depic" (click)="applyPoolFilter(5)" [class.active]="hasFilter(5)"><span></span></button>
         <button class="filter dlegendary" (click)="applyPoolFilter(6)" [class.active]="hasFilter(6)"><span></span></button>
     </div>
-    <div class="champion-list">
+    <div class="champion-list scrollable">
         <div *ngFor="let champion of getFilteredChampions()" class="champion ">
-            <por-champion *ngIf="champion.totalWeight > 0" [champion]="champion" class="rarity-{{champion.rarity}}" (click)="addChampion(champion)"></por-champion>
+            <por-champion [tooltips]="champion" *ngIf="champion.totalWeight > 0" [champion]="champion" [composition]="composition" class="rarity-{{champion.rarity}}" (click)="addChampion(champion)"></por-champion>
         </div>
     </div>
 </div>
@@ -31,19 +31,43 @@
     </por-synergy>
 </div>
 <div class="section selected ">
-    <h3>Composition en cours</h3>
-    <div class="champion-list ">
-        <div *ngFor="let champion of composition.champions let i= index " class="champion ">
-            <por-champion [champion]="champion " class="rarity-{{champion.rarity}} " (click)="removeChampion(i) "></por-champion>
+    <div class="current">
+        <h3>Composition en cours</h3>
+        <div class="champion-list ">
+            <div *ngFor="let champion of composition.champions let i= index " class="champion ">
+                <por-champion [champion]="champion " [composition]="composition" class="rarity-{{champion.rarity}} " (click)="removeChampion(i) "></por-champion>
+            </div>
+        </div>
+        <div class="champion-slots">
+            <div class="slot" *ngFor="let slot of articialArray(currentLevel)"></div>
+        </div>
+        <div class="comp-value">
+            <div class="value">{{ getCompValue() | number:'1.0-0' }}</div>
+            <div>Valeur de la composition</div>
         </div>
     </div>
-    <div class="champion-slots">
-        <div class="slot" *ngFor="let slot of articialArray(currentLevel)"></div>
+    <div>
+        <h2>Top tier compositions suggérées</h2>
+        <div *ngFor="let suggestedComposition of suggestedCompositions" class="suggested">
+            <h3 class="name">{{suggestedComposition?.name}} <span class="points">{{suggestedComposition?.points |number:'1.0-0' }} points</span> </h3>
+            <div class="champion-list ">
+                <div *ngFor="let champion of suggestedComposition?.champions; let i= index " class="champion ">
+                    <por-champion [champion]="getChampion(champion)" class="rarity-{{getChampion(champion).rarity}}">
+                        <div class="carry" *ngIf="champion === suggestedComposition.carry">CARRY</div>
+                        <div class="carry" *ngIf="champion === suggestedComposition.tank">TANK</div>
+                        <div class="carry" *ngIf="champion === suggestedComposition.carryLate">CARRY+</div>
+                        <div class="carry" *ngIf="champion === suggestedComposition.levelUpOption">LVL 9</div>
+                    </por-champion>
+                </div>
+            </div>
+            <div class="champion-slots">
+                <div class="slot" *ngFor="let slot of articialArray(currentLevel)"></div>
+            </div>
+        </div>
     </div>
-    <div class="comp-value">
-        <div class="value">{{ getCompValue() | number:'1.0-0' }}</div>
-        <div>Valeur de la composition</div>
-    </div>
+</div>
+<div class="section emblems ">
+
     <h3>Ajouter un emblême</h3>
     <div class="emblem-list ">
         <div class="emblem " *ngFor="let emblem of emblemsPool " (click)="addEmblem(emblem) ">

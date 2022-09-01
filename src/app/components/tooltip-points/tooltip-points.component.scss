@@ -1,0 +1,26 @@
+:host {
+    position: fixed;
+    z-index: 1000;
+    border: 1px solid #14141a;
+    background: #2e2e38;
+    box-shadow: 0 2px 8px rgba(#14141a, .5);
+    padding: 10px;
+    font-size: 11px;
+    width: 200px;
+    h4 {
+        margin-bottom: 12px;
+        font-size: 13px;
+    }
+    .keyvalue {
+        display: flex;
+        align-items: center;
+        height: 20px;
+        justify-content: space-between;
+        &.total {
+            font-weight: bold;
+            padding-bottom: 4px;
+            margin-bottom: 4px;
+            border-bottom: 1px solid #454552;
+        }
+    }
+}

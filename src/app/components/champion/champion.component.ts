@@ -1,4 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { iComposition } from './../../interface/interfaces';
+import { MainComponent } from './../../page/main/main.component';
+import { WeightRuntimeService } from './../../services/weight-runtime.service';
+import { ChangeDetectionStrategy, Component, HostBinding, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { iChampion } from 'src/app/interface/interfaces';
 
 @Component({
@@ -10,10 +13,13 @@ export class ChampionComponent implements OnInit {
 
 
   @Input() champion!: iChampion;
+  @Input() composition!: iComposition;
+
   
   constructor() { }
-
+  
   ngOnInit(): void {
   }
+
 
 }
